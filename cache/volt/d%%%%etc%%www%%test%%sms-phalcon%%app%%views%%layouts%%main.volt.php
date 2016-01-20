@@ -1,5 +1,7 @@
 <div class="page-header">
+
     <h4><?php echo $system->name; ?></h4>
+
 </div>
 
 <div class="container">

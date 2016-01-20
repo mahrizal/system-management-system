@@ -1,6 +1,8 @@
 <?php
 use Phalcon\Mvc\Controller;
 
+
+
 class BugsController extends BaseController
 {
 	function initialize($d='')
@@ -14,13 +16,14 @@ class BugsController extends BaseController
 	
 	}
 	
-	function index()
+	function indexAction()
 	{
 		
 	}
 	
 	function systemAction($id)
 	{
+		
 		$system = Systems::findFirstById($id);
 		
 		$this->view->system = $system;
@@ -28,15 +31,29 @@ class BugsController extends BaseController
 	}
 	
 		
-	function addnewAction($id)
+	function addnewAction($system_id)
 	{
-		$system = Systems::findFirstById($id);
-		
+		$system = Systems::findFirstById($system_id);
 		$form = new BugsForm;
 		
+		$max_number = Bugs::maximum(
+			array(
+				'column' => 'number',
+				'conditions' => 'system_id = '.$system_id
+			)
+		);
+		
+		
+		
 		$this->view->system = $system;
+		$this->view->max_number = $max_number + 1;
 		
 		$this->view->form 	= $form;
+		
+	}
+	
+	function max_number()
+	{
 		
 	}
 	
@@ -44,29 +61,33 @@ class BugsController extends BaseController
 	{
 		if($this->request->isPost() !== false)
 		{
-			$activities = new Activities;
-			$system_id  = $this->request->getPost('system_id');
-			$activities->start_hour  = $this->request->getPost('start_hour');
-			$activities->finish_hour = $this->request->getPost('finish_hour');
-			$activities->description = $this->request->getPost('description');
-			$activities->date 		 = $this->request->getPost('date');
-			$activities->system_id	 = $system_id;
-			$activities->modules_id	 = $this->request->getPost('modules_id');
-		
-		#	print_r($this->request->getPost());
-		#	exit();
-			if($activities->save() == false)
+			$bugs 	  			     = new Bugs;
+			$system_id 			     = $this->request->getPost('system_id');
+			
+			$bugs->date_found 		 = $this->request->getPost('date_found');
+			$bugs->system_id		 = $system_id;
+			$bugs->modules_id	 	 = $this->request->getPost('modules_id');
+			$bugs->number 			 = $this->request->getPost('number');
+			$bugs->description		 = $this->request->getPost('description');
+			$bugs->is_solved 		 = $this->request->getPost('is_solved');
+			$bugs->created_at 		 = date('Y-m-d H:i:s');
+			$bugs->created_by 		 = 105;
+			
+			if($bugs->save() == false)
 			{
-				foreach ($activities->getMessages() as $message) {
+				foreach ($bugs->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
+				
 			}else{
 				
-				$this->flash->success('Add New Activity Success');
+				$this->flash->success('Add New Bug Success');
 				
-				$this->response->redirect('activity/system/'.$system_id);
+				$this->response->redirect('bugs/system/'.$system_id);
 			}
+	
 		}
+		
 	}
 	
 	function deleteAction($activity_id, $system_id)
@@ -108,26 +129,24 @@ class BugsController extends BaseController
 			$activity_id			 = $this->request->getPost('id');
 			
 			$activities = Activities::find($activity_id);
-			
-			#print_r($this->request->getPost());exit();
+
 	
 			if($activities->update($this->request->getPost()) == false)
 			{
 				foreach ($activities->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-				
+		
 			}else{
 				
 				$this->flash->success('Edit Activity Success');
 				
-				$this->response->redirect('activity/system/'.$system_id);
+				$this->response->redirect('bugs/system/'.$system_id);
 			}
 			
 			
 		}
-		
-		
+	
 	}
 	
 }

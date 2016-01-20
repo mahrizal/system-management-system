@@ -1,29 +1,22 @@
 
-{{ form('activity/addsubmit', 'id': 'modulesForm') }}
+{{ form('bugs/addsubmit', 'id': 'modulesForm') }}
 
     <fieldset>
         <div class="control-group">
-            {{ form.label('date', ['class': 'control-label']) }}
+            {{ form.label('date_found', ['class': 'control-label']) }}
             <div class="controls">
-                {{ form.render('date', ['class': 'form-control']) }}
+                {{ form.render('date_found', ['class': 'form-control']) }}
+                <p class="help-block">(optional)</p>
+            </div>
+        </div>
+
+	    <div class="control-group">
+            {{ form.label('number', ['class': 'control-label']) }}
+            <div class="controls">
+                {{ form.render('number', ['class': 'form-control', 'value' : max_number ]) }}
                 <p class="help-block">(required)</p>
             </div>
         </div>
-		 <div class="control-group">
-            {{ form.label('start_hour', ['class': 'control-label']) }}
-            <div class="controls">
-                {{ form.render('start_hour', ['class': 'form-control']) }}
-                <p class="help-block">(required)</p>
-            </div>
-        </div>
-		 <div class="control-group">
-            {{ form.label('finish_hour', ['class': 'control-label']) }}
-            <div class="controls">
-                {{ form.render('finish_hour', ['class': 'form-control']) }}
-                <p class="help-block">(required)</p>
-            </div>
-        </div>
-	
 		
 		<div class="control-group">
             {{ form.label('modules_id', ['class': 'control-label']) }}
@@ -41,6 +34,18 @@
               
             </div>
         </div>	
+		 <div class="control-group">
+            {{ form.label('is_solved', ['class': 'control-label']) }}
+			<div class="controls">
+				Not yet {{ form.render('is_solved2', ['class': 'form-control']) }}
+			</div>
+            <div class="controls">
+				Yes {{ form.render('is_solved', ['class': 'form-control']) }}
+        
+            </div>
+			  
+        </div>
+		
       <div class="form-actions">
 			{{ hidden_field('system_id', 'value' : system.id) }}
             {{ submit_button('Submit', 'class': 'btn btn-primary') }}
@@ -49,3 +54,4 @@
 
     </fieldset>
 </form>
+<p></p>

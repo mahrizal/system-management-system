@@ -6,6 +6,9 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
+use Phalcon\Forms\Element\Radio;
+use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Query;
 
 use Phalcon\Validation\Validator\PresenceOf;
 
@@ -14,17 +17,17 @@ class BugsForm extends Form
 	
 	function initialize($entity = null, $options = null)
 	{
-		$date = new Text('date_found');
-		$date->setLabel('Input Date');
+		$date = new Date('date_found');
+		$date->setLabel('Input Date Found');
 		$date->setFilters(array('striptags', 'string'));
-		$date->addValidators(array(
-			new PresenceOf(array(
-			 'message' => 'Date Found is required'
-			 ))
-		)); 
 		$this->add($date);
 		
+		/*====================== Number =====================*/
 		
+
+		
+
+		$max_number = $max_number + 1;
 		$number = new Text('number');
 		$number->setLabel('Input Number');
 		$number->setFilters(array('striptags', 'string'));
@@ -34,19 +37,32 @@ class BugsForm extends Form
 			 ))
 		)); 
 		$this->add($number);
+	
 		
-				$number = new Text('number');
-		$number->setLabel('Input Number');
-		$number->setFilters(array('striptags', 'string'));
-		$number->addValidators(array(
+		
+		
+		
+
+		/*====================== Solved =====================*/		
+		$isSolved = new Radio('is_solved', array('name' => 'is_solved', 'value' => '1'));
+		$isSolved->setLabel('Is Solved');
+		$isSolved->addValidators(array(
 			new PresenceOf(array(
-			 'message' => 'Number is required'
+			 'message' => 'Is solved is required'
 			 ))
 		)); 
-		$this->add($number);
+	
+		$this->add($isSolved);
 		
-		
-		
+		$isSolved2 = new Radio('is_solved2', array('name' => 'is_solved', 'value' => '0', 'checked' => TRUE));
+		$isSolved2->setLabel('Is Solved2');
+		$isSolved2->addValidators(array(
+			new PresenceOf(array(
+			 'message' => 'Is solved is required'
+			 ))
+		)); 
+	
+		$this->add($isSolved2);
 		
 		$systemId = new Select('system_id', Systems::find(), 
 			array(
@@ -119,6 +135,10 @@ class BugsForm extends Form
 		}
 		$this->add($hidden);
 		
+
+		
 	}
+	
+	
 	
 }
