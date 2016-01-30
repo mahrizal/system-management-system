@@ -24,18 +24,18 @@
             </div>
         </div>
 		
-		<div class="control-group">
-            <?php echo $form->label('system_id', array('class' => 'control-label')); ?>
-            <div class="controls">
-                <?php echo $form->render('system_id', array('class' => 'form-control')); ?>
-                <p class="help-block">(required)</p>
-            </div>
-        </div>
 		
 		<div class="control-group">
             <?php echo $form->label('modules_id', array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php echo $form->render('modules_id', array('class' => 'form-control')); ?>
+                <p class="help-block">(required)</p>
+            </div>
+        </div>
+			<div class="control-group">
+            <?php echo $form->label('bugs_id', array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php echo $form->render('bugs_id', array('class' => 'form-control')); ?>
                 <p class="help-block">(required)</p>
             </div>
         </div>

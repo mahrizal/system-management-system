@@ -129,4 +129,11 @@ class ModulesController extends BaseController
 		
 		
 	}
+	
+	function detailAction($id, $system_id)
+	{
+		
+	}
+	
+
 }

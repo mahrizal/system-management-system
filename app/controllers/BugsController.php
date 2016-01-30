@@ -36,6 +36,17 @@ class BugsController extends BaseController
 		$system = Systems::findFirstById($system_id);
 		$form = new BugsForm;
 		
+		
+		
+		$this->view->system = $system;
+		$this->view->max_number = $this->new_number($system_id);
+		
+		$this->view->form 	= $form;
+		
+	}
+	
+	function new_number($system_id)
+	{
 		$max_number = Bugs::maximum(
 			array(
 				'column' => 'number',
@@ -43,17 +54,7 @@ class BugsController extends BaseController
 			)
 		);
 		
-		
-		
-		$this->view->system = $system;
-		$this->view->max_number = $max_number + 1;
-		
-		$this->view->form 	= $form;
-		
-	}
-	
-	function max_number()
-	{
+		return $max_number + 1;
 		
 	}
 	
@@ -92,48 +93,49 @@ class BugsController extends BaseController
 	
 	function deleteAction($activity_id, $system_id)
 	{
-		$activity = Activities::findFirstById($activity_id);
-		if ($activity != false) {
-			if ($activity->delete() == false) {
-				echo "Sorry, we can't delete the module right now: \n";
+		$bugs = Bugs::findFirstById($activity_id);
+		if ($bugs != false) {
+			if ($bugs->delete() == false) {
+				echo "Sorry, we can't delete the Bugs right now: \n";
 
 				foreach ($activity->getMessages() as $message) {
 					echo $message, "\n";
 				}
 			} else {
-				$this->flash->success('Delete Activity Success');
+				$this->flash->success('Delete bugs Success');
 				
-				$this->response->redirect('activity/system/'.$system_id);
+				$this->response->redirect('bugs/system/'.$system_id);
 			}
 		}
 	}
 	
-	function editAction($activity_id, $system_id)
+	function editAction($bugs_id, $system_id)
 	{
 		
-		$activity = Activities::findFirstById($activity_id);
-		$system = 	Systems::findFirstById($system_id);
+		$bugs   = Bugs::findFirstById($bugs_id);
+		$system = Systems::findFirstById($system_id);
 		
 	
-		$form = new ActivityForm($activity);
+		$form = new BugsForm($bugs);
 
-		$this->view->activity = $activity;
+		$this->view->bugs = $bugs;
 		$this->view->system   = $system;
-		$this->view->page     = 'Modules';
+		$this->view->page     = 'Bugs';
 		$this->view->form     = $form;
+		$this->view->max_number = $this->new_number($system_id);
 		
 		if($this->request->isPost())
 		{
-			$activities 			 = new Activities;
+			$bugs 			 = new Bugs;
 			
-			$activity_id			 = $this->request->getPost('id');
+			$bugs_id			 = $this->request->getPost('id');
 			
-			$activities = Activities::find($activity_id);
+			$bugs = Bugs::find($activity_id);
 
 	
-			if($activities->update($this->request->getPost()) == false)
+			if($bugs->update($this->request->getPost()) == false)
 			{
-				foreach ($activities->getMessages() as $message) {
+				foreach ($bugs_id->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
 		

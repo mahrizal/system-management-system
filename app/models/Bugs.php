@@ -29,6 +29,12 @@ class Bugs extends Model
 		$this->belongsTo('modules_id', 'Modules', 'id', array(
 			'reusable' => true
 		));
+		
+		$this->hasMany('id', 'Activities', 'bugs_id', array(
+        	'foreignKey' => array(
+        		'message' => 'Bugs cannot be deleted because it\'s used in Activities'
+        	)
+        ));
 	}
 	
 

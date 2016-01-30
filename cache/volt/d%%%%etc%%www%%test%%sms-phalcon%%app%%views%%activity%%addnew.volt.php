@@ -32,6 +32,13 @@
                 <p class="help-block">(required)</p>
             </div>
         </div>
+		<div class="control-group">
+            <?php echo $form->label('bugs_id', array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php echo $form->render('bugs_id', array('class' => 'form-control')); ?>
+                <p class="help-block">(required)</p>
+            </div>
+        </div>
 
         <div class="control-group">
             <?php echo $form->label('description', array('class' => 'control-label')); ?>

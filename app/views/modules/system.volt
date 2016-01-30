@@ -18,7 +18,7 @@
 			<td>{{ modules.name }}</td>
 			<td>{{ modules.description }}</td>
 			<td>
-				{{ link_to('modules/system/detail/'~modules.id, '<button class="btn btn-default btn-sm">Detail</button>') }}
+				{{ link_to('modules/detail/'~modules.id~'/, '<button class="btn btn-default btn-sm">Detail</button>') }}
 				{{ link_to('modules/edit/'~modules.id~'/'~modules.system_id, '<button class="btn btn-warning btn-sm">Edit</button>') }}
 				{{ link_to('modules/delete/'~modules.id~'/'~modules.system_id, '<button class="btn btn-danger btn-sm">Delete</button>') }}
 			</td>

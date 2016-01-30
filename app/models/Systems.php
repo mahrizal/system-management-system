@@ -32,7 +32,13 @@ class Systems extends Model
 		
 		$this->hasMany('id', 'Bugs', 'system_id', array(
         	'foreignKey' => array(
-        		'message' => 'Bugs cannot be deleted because it\'s used in Bugs'
+        		'message' => 'System cannot be deleted because it\'s used in Bugs'
+        	)
+        ));
+		
+		$this->hasMany('id', 'Versions', 'system_id', array(
+        	'foreignKey' => array(
+        		'message' => 'System cannot be deleted because it\'s used in Versions'
         	)
         ));
 	}

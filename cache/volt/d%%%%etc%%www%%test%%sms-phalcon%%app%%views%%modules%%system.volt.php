@@ -18,7 +18,7 @@
 			<td><?php echo $modules->name; ?></td>
 			<td><?php echo $modules->description; ?></td>
 			<td>
-				<?php echo $this->tag->linkTo(array('modules/system/detail/' . $modules->id, '<button class="btn btn-default btn-sm">Detail</button>')); ?>
+				<?php echo $this->tag->linkTo(array('modules/detail/' . $modules->id, '<button class="btn btn-default btn-sm">Detail</button>')); ?>
 				<?php echo $this->tag->linkTo(array('modules/edit/' . $modules->id . '/' . $modules->system_id, '<button class="btn btn-warning btn-sm">Edit</button>')); ?>
 				<?php echo $this->tag->linkTo(array('modules/delete/' . $modules->id . '/' . $modules->system_id, '<button class="btn btn-danger btn-sm">Delete</button>')); ?>
 			</td>

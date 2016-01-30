@@ -21,7 +21,11 @@ class SystemController extends BaseController
 		->addJs('public/vendor/twbs/bootstrap/docs/assets/js/vendor/jquery.min.js')
 		->addJs('public/vendor/twbs/bootstrap/docs/assets/css/ie10-viewport-bug-workaround.js');
 		
-		$this->view->systems = Systems::find();
+		$this->view->systems = Systems::find(
+			array(
+				'order'	=> ' name ASC '
+			)
+		);
 		
 	
 	}

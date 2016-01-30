@@ -27,7 +27,7 @@ class BugsForm extends Form
 
 		
 
-		$max_number = $max_number + 1;
+		
 		$number = new Text('number');
 		$number->setLabel('Input Number');
 		$number->setFilters(array('striptags', 'string'));
@@ -115,6 +115,36 @@ class BugsForm extends Form
 			);
 		}
 		$this->add($modulesId);
+		
+		
+		/*===== Bug =============*/
+				
+		$systemId = new Select('system_id', Systems::find(), 
+			array(
+				'using' => array(
+								'id',
+								'name'
+							),
+				'useEmpty' => true
+			)
+		);
+		$systemId->setLabel('Select System');
+		$systemId->addValidators(array(
+			new PresenceOf(array(
+			 'message' => 'System is required'
+			 ))
+		)); 
+		
+		if($entity)
+		{
+			$systemId->setDefault(
+				array($entity->system_id)
+			);
+		}
+		
+		$this->add($systemId);
+		
+		
 		
 		$description = new TextArea('description');
 		$description->setLabel('Input Description');

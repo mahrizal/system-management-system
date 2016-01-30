@@ -13,11 +13,15 @@ class Activities extends Model
 
 	public $date;
 	
+	public $bugs_id;
+	
 	public $description;
 	
 	public $start_hour;
 	
 	public $finish_hour;
+	
+	public $employees_id;
 	
 	function initialize()
 	{
@@ -28,7 +32,13 @@ class Activities extends Model
 		$this->belongsTo('modules_id', 'Modules', 'id', array(
 			'reusable' => true
 		));
+		
+		$this->belongsTo('bugs_id', 'Bugs', 'id', array(
+			'reusable' => true
+		));
 	}
+	
+	
 	
 	
 	

@@ -32,6 +32,13 @@
                 <p class="help-block">(required)</p>
             </div>
         </div>
+		<div class="control-group">
+            {{ form.label('bugs_id', ['class': 'control-label']) }}
+            <div class="controls">
+                {{ form.render('bugs_id', ['class': 'form-control']) }}
+                <p class="help-block">(required)</p>
+            </div>
+        </div>
 
         <div class="control-group">
             {{ form.label('description', ['class': 'control-label']) }}

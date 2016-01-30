@@ -21,7 +21,14 @@
 			<td>{{ activity.date }}</td>
 			<td>{{ activity.start_hour }} - {{ activity.finish_hour }}</td>
 			<td>{{ activity.description }}</td>
-			<td>{{ activity.modules.name }}</td>
+			<td>
+				{% if activity.modules_id %}
+					{{ activity.modules.name }} 
+				{% endif %}
+				{% if activity.bugs_id %}
+					- bug #{{ link_to('activity',activity.bugs.number ) }}
+				{% endif %}
+			</td>
 			<td>
 				{{ link_to('activity/system/detail/'~activity.id, '<span class="glyphicon glyphicon-folder-open"></span>') }}
 				&nbsp; {{ link_to('activity/edit/'~activity.id~'/'~activity.system_id, '<span class="glyphicon glyphicon-pencil"></span>') }}

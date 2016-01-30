@@ -9,11 +9,32 @@
 	<div class="row">
 		<div class="col-md-3 col-xs-7">
 			<ul class="nav nav-pills nav-stacked">
-			    <li role="presentation"><a href="{{ url('system/detail/'~ system.id) }}"">About</a></li>
-			    <li role="presentation"><a href="{{ url('modules/system/'~ system.id) }}">Modules</a></li>
-				<li role="presentation"><a href="{{ url('activity/system/'~ system.id) }}">Activities</a></li>
-				<li role="presentation"><a href="{{ url('bugs/system/'~ system.id) }}">Bugs</a></li>
-				<li role="presentation"><a href="{{ url('versions/system/'~ system.id) }}">Versions</a></li>
+			    <li role="presentation" 
+					{% if  dispatcher.getControllerName() == 'system' %}
+						class="active"
+					{% endif %}
+				><a href="{{ url('system/detail/'~ system.id) }}">About</a></li>
+			    <li role="presentation"
+				
+					{% if  dispatcher.getControllerName() == 'modules' %}
+						class="active"
+					{% endif %}
+				><a href="{{ url('modules/system/'~ system.id) }}">Modules</a></li>
+				<li role="presentation"
+					{% if  dispatcher.getControllerName() == 'activity' %}
+						class="active"
+					{% endif %}
+				><a href="{{ url('activity/system/'~ system.id) }}">Activities</a></li>
+				<li role="presentation"
+					{% if  dispatcher.getControllerName() == 'bugs' %}
+						class="active"
+					{% endif %}
+				><a href="{{ url('bugs/system/'~ system.id) }}">Bugs</a></li>
+				<li role="presentation"
+					{% if  dispatcher.getControllerName() == 'versions' %}
+						class="active"
+					{% endif %}
+				><a href="{{ url('versions/system/'~ system.id) }}">Versions</a></li>
 			</ul>
 		</div>
 		<div class="col-md-9 cols-xs-13">

@@ -5,11 +5,12 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th>No</th>
-			<th>Number</th>
-			<th>Date found</th>
+			<th width="20px">No</th>
+			<th width="70px">Number</th>
+			<th width="100px">Found Date</th>
 			<th>Description</th>
-			<th>Module</th>
+			<th width="80px">Module</th>
+			<th width="120px">Is Solved</th>
 			<th width="70px">Action</th>
 		</tr>
 	</thead>
@@ -27,8 +28,15 @@
 				{% endif %}
 			</td>
 			<td>
-				&nbsp; {{ link_to('activity/edit/'~bug.id~'/'~bug.system_id, '<span class="glyphicon glyphicon-pencil"></span>') }}
-				&nbsp; {{ link_to('activity/delete/'~bug.id~'/'~bug.system_id, '<span class="glyphicon glyphicon-trash"></span>') }}
+			{% if bug.is_solved == '0' %}
+				Not solved yet
+			{% else  %}
+				Solved
+			{% endif %}
+			</td>
+			<td>
+				&nbsp; {{ link_to('bugs/edit/'~bug.id~'/'~bug.system_id, '<span class="glyphicon glyphicon-pencil"></span>') }}
+				&nbsp; {{ link_to('bugs/delete/'~bug.id~'/'~bug.system_id, '<span class="glyphicon glyphicon-trash"></span>') }}
 			</td>
 		</tr>
 		{% set i = i + 1 %}

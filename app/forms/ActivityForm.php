@@ -14,9 +14,10 @@ class ActivityForm extends Form
 	
 	function initialize($entity = null, $options = null)
 	{
-		$date = new Text('date');
+		$date = new Date('date');
 		$date->setLabel('Input Date');
 		$date->setFilters(array('striptags', 'string'));
+		$date->setDefault(date('Y-m-d'));
 		$date->addValidators(array(
 			new PresenceOf(array(
 			 'message' => 'Date is required'
@@ -71,30 +72,9 @@ class ActivityForm extends Form
 		
 		
 		
-		$modulesId = new Select('modules_id', Modules::find(), 
-			array(
-			
-				'using' => array(
-							'id',
-							'name'
-						),
-				'useEmpty' => true
-			)
-		);
-		$modulesId->setLabel('Select Modules');
-		$modulesId->addValidators(array(
-			new PresenceOf(array(
-			 'message' => 'Modules is required'
-			 ))
-		)); 
 		
-		if($entity)
-		{
-			$modulesId->setDefault(
-				array($entity->modules_id)
-			);
-		}
-		$this->add($modulesId);
+		
+		
 		
 		$description = new TextArea('description');
 		$description->setLabel('Input Description');

@@ -9,11 +9,32 @@
 	<div class="row">
 		<div class="col-md-3 col-xs-7">
 			<ul class="nav nav-pills nav-stacked">
-			    <li role="presentation"><a href="<?php echo $this->url->get('system/detail/' . $system->id); ?>"">About</a></li>
-			    <li role="presentation"><a href="<?php echo $this->url->get('modules/system/' . $system->id); ?>">Modules</a></li>
-				<li role="presentation"><a href="<?php echo $this->url->get('activity/system/' . $system->id); ?>">Activities</a></li>
-				<li role="presentation"><a href="<?php echo $this->url->get('bugs/system/' . $system->id); ?>">Bugs</a></li>
-				<li role="presentation"><a href="<?php echo $this->url->get('versions/system/' . $system->id); ?>">Versions</a></li>
+			    <li role="presentation" 
+					<?php if ($this->dispatcher->getControllerName() == 'system') { ?>
+						class="active"
+					<?php } ?>
+				><a href="<?php echo $this->url->get('system/detail/' . $system->id); ?>">About</a></li>
+			    <li role="presentation"
+				
+					<?php if ($this->dispatcher->getControllerName() == 'modules') { ?>
+						class="active"
+					<?php } ?>
+				><a href="<?php echo $this->url->get('modules/system/' . $system->id); ?>">Modules</a></li>
+				<li role="presentation"
+					<?php if ($this->dispatcher->getControllerName() == 'activity') { ?>
+						class="active"
+					<?php } ?>
+				><a href="<?php echo $this->url->get('activity/system/' . $system->id); ?>">Activities</a></li>
+				<li role="presentation"
+					<?php if ($this->dispatcher->getControllerName() == 'bugs') { ?>
+						class="active"
+					<?php } ?>
+				><a href="<?php echo $this->url->get('bugs/system/' . $system->id); ?>">Bugs</a></li>
+				<li role="presentation"
+					<?php if ($this->dispatcher->getControllerName() == 'versions') { ?>
+						class="active"
+					<?php } ?>
+				><a href="<?php echo $this->url->get('versions/system/' . $system->id); ?>">Versions</a></li>
 			</ul>
 		</div>
 		<div class="col-md-9 cols-xs-13">
